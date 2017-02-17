@@ -18,6 +18,6 @@ io.on('connection', function(socket) {
 	})
 });
 
-http.listen(3000, function() {
-	console.log("Chat successfully listen on localhost:3000");
+http.listen(process.env.PORT || 3000, function() {
+	console.log("Chat successfully listen on 3000");
 });
