@@ -3,59 +3,77 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Chat demo</title>
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/skeleton.css">
 	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/message.css">
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-
-			<div class="twelve columns">
-				<ul id="messages-list" class="messages">
-				</ul>
-
-				<div class="row">
-					<div class="ten columns">
-						<input class="u-full-width" id="input-text" type="text">
-					</div>
-					<div class="two columns">
-						<button id="send-btn">Send!</button>
-					</div>
+	<header></header>
+	<div class="content">
+		<div class="chat-header row">
+			<div class="header-left four columns">
+				<div class="profile-pic">
+					<img id="profile" src="https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png" alt="">
 				</div>
 			</div>
 
+			<div class="header-right eight columns">
+				
+			</div>
 		</div>
+
+		<div class="chat-body row">
+			<div class="chat-list">	
+			</div>
+
+			<div class="chat-messages">
+
+				<div id="message-list" class="messages">
+
+					<!--
+					<div class="left-bubble-wrapper">
+						<div class="bubble">
+						  <div class="txt">
+						    <p id="name-test" class="name">Michella</p>
+						    <p class="message">Hey, this is a test!</p>
+						    <span class="timestamp">10:20 pm</span>
+						  </div>
+						  <div class="bubble-arrow"></div>
+						</div>
+					</div>
+
+					<div class="right-bubble-wrapper">
+						  <div class="bubble alt">
+						    <div class="txt">
+						      <p class="name alt">+353 87 1234 567<span> ~ James</span></p>
+						      <p class="message">So great!</p>
+						      <span class="timestamp">10:22 pm</span>
+						    </div>
+						    <div class="bubble-arrow alt"></div>
+						  </div>
+					</div> -->
+
+				</div>
+
+				<div class="chat-input">
+					<div class="emoji">
+						<img width="24" height="24" src="./img/emoji.png" alt="">
+					</div>
+					<input class="chat-text" id="input-text" placeholder="Escribe un mensaje aquí" type="text">
+				</div>
+
+			</div>
+		</div>
+
 	</div>
 
 	<script src="/socket.io/socket.io.js"></script>
-	<script> 
+	<script src="./js/client.js"></script>
+	<script src="./js/index.js"></script>
+	<script src="./lib/jquery.js"></script>
 
-		window.onload = setup;
-
-		const socket = io(),
-			  textInput = document.getElementById('input-text'),
-			  button = document.getElementById('send-btn'),
-			  ul = document.getElementById('messages-list');
-
-		function addMessage( msg ) {
-			let newElem;
-			newElem = document.createElement('li');
-			newElem.innerHTML = msg;
-			ul.appendChild( newElem );
-
-		}
-
-		function setup() {
-			button.addEventListener('click', function() {
-				socket.emit('message', textInput.value );
-			});
-
-			socket.on('message', function( msg ) {
-				addMessage( msg );
-			})
-		}
-
-	</script>
 </body>
 </html>

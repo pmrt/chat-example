@@ -1,0 +1,132 @@
+
+*,
+*:after,
+*:before {
+	padding: 0;
+	box-sizing: border-box;
+}
+
+input { padding: 6px 13px !important; }
+
+html, body { height: 100%;margin: 0; }
+
+header {
+	background-color: rgb( 22, 150, 136);
+	height: 150px;
+}
+
+body {
+	background-color: rgb( 217, 219, 214);
+}
+
+.content {
+	position: absolute;
+	top: 5%; left: 6%; right: 6%; bottom: 5%;
+	background-color: rgb( 238, 238, 238);
+	box-shadow: 1px 0.5px 10px rgba(0, 0, 0, 0.37);
+}
+
+.chat-header {
+	position: relative;
+	height: 60px;
+}
+
+.chat-header > .header-left {
+	height: inherit;
+	display: flex;
+}
+
+.chat-header > .header-left > .profile-pic {
+	max-width: 45px;
+	padding: 10px 12px;
+}
+
+.chat-header > .header-left > .profile-pic > img {
+	border-radius: 50%;
+	width: 40px;
+}
+
+.chat-header > .header-right {
+	height: inherit;
+	border-left: 1px solid rgba(0, 0, 0, 0.08);
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.17);
+	z-index: 99;
+	position: relative;
+}
+
+.chat-body {
+	position: absolute;
+	top: 60px; bottom: 0; left: 0; right: 0;
+}
+
+.chat-body > .chat-list {
+	position: absolute;
+	top: 0; bottom: 0; right: 65.333333%; left: 0;
+	background-color: rgb( 251, 251, 251);
+}
+
+.chat-body > .chat-messages {
+	position: absolute;
+	top: 0; bottom: 0; right: 0; left: 34.66667%;
+	background-color: red;
+	background-color: rgb( 231, 224, 218);
+}
+
+.chat-body > .chat-messages > .messages {
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 70px;
+	padding: 40px;
+	overflow: scroll;
+}
+
+.chat-body > .chat-messages > .chat-input {
+	position: absolute;
+	left: 0; right: 0; bottom: 0; height: 60px;
+	background-color: rgb( 245, 241, 238);
+	display: flex;
+}
+
+.chat-body > .chat-messages > .chat-input > .emoji {
+	width: 10%;
+	text-align: center;
+}
+
+.chat-body > .chat-messages > .chat-input > .emoji > img {
+	position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.chat-body > .chat-messages > .chat-input > .emoji > img:hover {
+	cursor: pointer;
+} 
+
+.chat-body > .chat-messages > .chat-input > .chat-text {
+	position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80%;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: rgba(51, 51, 51, 0.86);
+    font-family: Helvetica;
+    letter-spacing: 0.4px;
+}
+
+.chat-body > .chat-messages > .chat-input > .chat-text::-webkit-input-placeholder {
+  font-family: sans-serif;
+}
+
+.chat-body > .chat-messages > .chat-input > .chat-text:-ms-input-placeholder {
+  font-family: sans-serif;
+}
+
+.chat-body > .chat-messages > .chat-input > .chat-text:-moz-placeholder {
+  font-family: sans-serif;
+}
+
+.chat-body > .chat-messages > .chat-input > .chat-text::-moz-placeholder {
+  font-family: sans-serif;
+}
