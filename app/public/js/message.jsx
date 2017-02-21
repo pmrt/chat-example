@@ -16,7 +16,6 @@ export class MessageApp extends React.Component {
 			color: socket.color
 		}
 		socket.emit('message', message);
-		//this.addMessage( message );
 	}
 
 	addMessage( data ) {
@@ -91,7 +90,6 @@ export class MessageInput extends React.Component {
 class MessageList extends React.Component {
 	constructor(props) {
 		super(props);
-
 	}
 
 	fetchMessages() {
