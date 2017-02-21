@@ -86,7 +86,6 @@ class MessageInput extends React.Component {
 class MessageList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.lastSender = '';
 
 	}
 
@@ -94,18 +93,12 @@ class MessageList extends React.Component {
 		var self = this, sameUser = false;
 		return this.props.messages.map( (msg, index) => {
 			var direction = msg.direction || 'left-bubble-wrapper';
-			if ( msg.nickname === self.lastSender ) {
-				sameUser = true;
-			} 
-			self.lastSender = msg.nickname;
 			return (
 					<Message
 							key={index}
 							direction={direction}
 							msg={msg.msg}
 							name={msg.nickname}
-							same={sameUser}
-
 					/>
 				);
 		});

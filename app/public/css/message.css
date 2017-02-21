@@ -16,12 +16,14 @@
   margin-top: 8px;
 }
 
+/*
 .right-bubble-wrapper + .right-bubble-wrapper .bubble-arrow,
 .left-bubble-wrapper + .left-bubble-wrapper .bubble-arrow,
 .right-bubble-wrapper + .right-bubble-wrapper .name,
 .left-bubble-wrapper + .left-bubble-wrapper .name{ 
   display: none;
 }
+*/
 
 
 .clear {
