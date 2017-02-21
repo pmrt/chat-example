@@ -1,8 +1,8 @@
 module.exports = {
-  entry: './app/public/js/message.jsx',
+  entry: './app/public/routes/index.jsx',
   output: {
     path: './app/public/js',
-    filename: 'message.bundle.js'
+    filename: 'main.bundle.js'
   },
   resolve: {
     extensions: ['.js', '.jsx']

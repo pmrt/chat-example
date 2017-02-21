@@ -48,7 +48,7 @@ export class MessageApp extends React.Component {
 }
 
 
-export class MessageInput extends React.Component {
+class MessageInput extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = { text: ''}
@@ -125,7 +125,7 @@ class MessageList extends React.Component {
 }
 
 
-export class Message extends React.Component {
+class Message extends React.Component {
 	constructor( props ) {
 		super( props );
 	}
@@ -163,4 +163,4 @@ export class Message extends React.Component {
 }
 
 
-ReactDOM.render(<MessageApp />, rootNode);
+
