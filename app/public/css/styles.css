@@ -93,8 +93,7 @@ body {
 
 .chat-messages .chat-input .emoji > img {
 	position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 18px;
 }
 
 .chat-messages .chat-input .emoji > img:hover {
