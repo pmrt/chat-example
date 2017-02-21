@@ -8,9 +8,15 @@ function getRandomName() {
 		  		images = data.results[0].picture;
 		  	nick = name.first + " " + name.last;
 		  	set( 'nickname', capitalize(nick) );
-		  	profile.src = images.large || images.medium;
+		  	profilePic.src = images.large || images.medium;
 	  }
 	});
+}
+
+function getColors() {
+	var color, rgb = choice( colors );
+	color = "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")";
+	set( 'color', color);
 }
 
 function choice(arr) {

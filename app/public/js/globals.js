@@ -1,7 +1,7 @@
 // const textInput = document.getElementById('input-text'),
 // 	  button = document.getElementById('send-btn'),
-const rootNode = document.getElementById('app-chat'),
-	  profile = document.getElementById('profile'),
+var rootNode = document.getElementById('app-chat'),
+	  profilePic = document.getElementById('profile'),
 	  colors = [
 	  		{r: 46, g: 204, b: 113 },
 	  		{r: 52, g: 152, b: 219 },

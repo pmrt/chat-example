@@ -99,6 +99,7 @@ class MessageList extends React.Component {
 							direction={direction}
 							msg={msg.msg}
 							name={msg.nickname}
+							color={msg.color}
 					/>
 				);
 		});
@@ -136,7 +137,7 @@ class Message extends React.Component {
 			<div className={direction}>
 				<div className="bubble">
 				  <div className="txt">
-				    <p className="name">{this.props.name}</p>
+				    <p style={{color: this.props.color}} className="name">{this.props.name}</p>
 				    <p className="message">{this.props.msg}</p>
 				    <span className="timestamp">{getTime()}</span>
 				  </div>
