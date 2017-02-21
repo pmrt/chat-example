@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+var lastSender = '';
+
 export class MessageApp extends React.Component {
 
 	constructor( props ) {
@@ -13,11 +15,10 @@ export class MessageApp extends React.Component {
 		var message = { 
 			nickname: socket.nickname, 
 			msg: text,
-			color: socket.color 
+			color: socket.color
 		}
 		socket.emit('message', message);
-		message['direction'] = 'right-bubble-wrapper'; 
-		this.addMessage( message );
+		//this.addMessage( message );
 	}
 
 	addMessage( data ) {
@@ -27,8 +28,8 @@ export class MessageApp extends React.Component {
 	}
 
 	componentDidMount() {
+		socket.emit('loaded');
 		socket.once( 'messages', function(msgs) {
-			console.log( msgs );
 			this.setState({
 				messages: msgs
 			})
@@ -96,12 +97,17 @@ class MessageList extends React.Component {
 	}
 
 	fetchMessages() {
-		var self = this, sameUser = false;
+		var direction;
 		return this.props.messages.map( (msg, index) => {
-			var direction = msg.direction || 'left-bubble-wrapper';
+			if ( msg.nickname === socket.nickname ) {
+				direction = 'right-bubble-wrapper'
+			} else {
+				direction = 'left-bubble-wrapper'
+			}
 			return (
 					<Message
-							key={index}
+							key={msg.id}
+							id={msg.id}
 							direction={direction}
 							msg={msg.msg}
 							name={msg.nickname}
@@ -129,8 +135,14 @@ export class Message extends React.Component {
 	}
 
 	componentDidMount() {
+		if ( lastSender == this.props.name ) {
+			this.refs["arrow-"+this.props.id].style.display = 'none';
+			this.refs["name-"+this.props.id].style.display = 'none';
+			this.refs["wrapper-" +this.props.id].style.marginTop = '8px';
+		}
 		let me = ReactDOM.findDOMNode(this);
 		me.scrollIntoView();
+		lastSender = this.props.name;
 	}
 
 	render() {
@@ -140,14 +152,14 @@ export class Message extends React.Component {
 			classArrow += " alt"
 		}
 		return (
-			<div className={direction}>
+			<div ref={"wrapper-" +this.props.id} className={direction}>
 				<div className="bubble">
 				  <div className="txt">
-				    <p style={{color: this.props.color}} className="name">{this.props.name}</p>
+				    <p style={{color: this.props.color}} className="name" ref={"name-" +this.props.id}>{this.props.name}</p>
 				    <p className="message">{this.props.msg}</p>
 				    <span className="timestamp">{getTime()}</span>
 				  </div>
-				  <div className={classArrow}></div>
+				  <div className={classArrow} ref={"arrow-" +this.props.id}></div>
 				</div>
 			</div>
 		);

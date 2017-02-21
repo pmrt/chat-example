@@ -1,9 +1,5 @@
 const socket = io();
 
-// socket.on('message', function( data ) {
-// 	addMessage( data.nick, data.msg, data.color );
-// })
-
 function send( msg ) {
 	console.log( msg );
 	socket.emit('message', { 
