@@ -5,3 +5,5 @@ function setup() {
 	getRandomName();
 	getColors();
 }
+
+const socket = io();

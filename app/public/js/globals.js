@@ -1,8 +1,7 @@
-// const textInput = document.getElementById('input-text'),
-// 	  button = document.getElementById('send-btn'),
 var rootNode = document.getElementById('app-chat'),
-	  profilePic = document.getElementById('profile'),
-	  colors = [
+	profilePic = document.getElementById('profile'),
+	lastSender = '',
+	colors = [
 	  		{r: 46, g: 204, b: 113 },
 	  		{r: 52, g: 152, b: 219 },
 	  		{r: 192, g: 83, b: 221 },
@@ -12,5 +11,3 @@ var rootNode = document.getElementById('app-chat'),
 	  		{r: 22, g: 154, b: 24 },
 	  		{r: 248, g: 126, b: 130 }
 	  ];
-
-var lastMessageNick = '';

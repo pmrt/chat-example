@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-var lastSender = '';
-
 export class MessageApp extends React.Component {
 
 	constructor( props ) {
