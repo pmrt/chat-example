@@ -59,49 +59,49 @@ body {
 	top: 60px; bottom: 0; left: 0; right: 0;
 }
 
-.chat-body > .chat-list {
+.chat-body .chat-list {
 	position: absolute;
 	top: 0; bottom: 0; right: 65.333333%; left: 0;
 	background-color: rgb( 251, 251, 251);
 }
 
-.chat-body > .chat-messages {
+.chat-messages {
 	position: absolute;
 	top: 0; bottom: 0; right: 0; left: 34.66667%;
 	background-color: red;
 	background-color: rgb( 231, 224, 218);
 }
 
-.chat-body > .chat-messages > .messages {
+.chat-messages .messages {
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 70px;
 	padding: 40px;
 	overflow: scroll;
 }
 
-.chat-body > .chat-messages > .chat-input {
+.chat-messages .chat-input {
 	position: absolute;
 	left: 0; right: 0; bottom: 0; height: 60px;
 	background-color: rgb( 245, 241, 238);
 	display: flex;
 }
 
-.chat-body > .chat-messages > .chat-input > .emoji {
+.chat-messages .chat-input  .emoji {
 	width: 10%;
 	text-align: center;
 }
 
-.chat-body > .chat-messages > .chat-input > .emoji > img {
+.chat-messages .chat-input .emoji > img {
 	position: relative;
     top: 50%;
     transform: translateY(-50%);
 }
 
-.chat-body > .chat-messages > .chat-input > .emoji > img:hover {
+.chat-messages .chat-input .emoji > img:hover {
 	cursor: pointer;
 } 
 
-.chat-body > .chat-messages > .chat-input > .chat-text {
+.chat-messages .chat-input .chat-text {
 	position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -115,18 +115,18 @@ body {
     letter-spacing: 0.4px;
 }
 
-.chat-body > .chat-messages > .chat-input > .chat-text::-webkit-input-placeholder {
+.chat-messages .chat-input .chat-text::-webkit-input-placeholder {
   font-family: sans-serif;
 }
 
-.chat-body > .chat-messages > .chat-input > .chat-text:-ms-input-placeholder {
+.chat-messages .chat-input .chat-text:-ms-input-placeholder {
   font-family: sans-serif;
 }
 
-.chat-body > .chat-messages > .chat-input > .chat-text:-moz-placeholder {
+.chat-messages .chat-input .chat-text:-moz-placeholder {
   font-family: sans-serif;
 }
 
-.chat-body > .chat-messages > .chat-input > .chat-text::-moz-placeholder {
+.chat-messages .chat-input .chat-text::-moz-placeholder {
   font-family: sans-serif;
 }

@@ -29,11 +29,11 @@
 			<div class="chat-list">	
 			</div>
 
-			<div class="chat-messages">
+			<div id="app-chat">
 
-				<div id="message-list" class="messages">
+				<!-- <div id="message-list" class="messages">
 
-					<!--
+					
 					<div class="left-bubble-wrapper">
 						<div class="bubble">
 						  <div class="txt">
@@ -54,7 +54,7 @@
 						    </div>
 						    <div class="bubble-arrow alt"></div>
 						  </div>
-					</div> -->
+					</div>
 
 				</div>
 
@@ -63,7 +63,7 @@
 						<img width="24" height="24" src="./img/emoji.png" alt="">
 					</div>
 					<input class="chat-text" id="input-text" placeholder="Escribe un mensaje aquí" type="text">
-				</div>
+				</div>-->
 
 			</div>
 		</div>
@@ -71,9 +71,13 @@
 	</div>
 
 	<script src="/socket.io/socket.io.js"></script>
+
+	<script src="./js/globals.js"></script>
+	<script src="./js/common.js"></script>
 	<script src="./js/client.js"></script>
 	<script src="./js/index.js"></script>
 	<script src="./lib/jquery.js"></script>
+	<script src="./js/message.bundle.js"></script>
 
 </body>
 </html>
