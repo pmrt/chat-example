@@ -65,14 +65,15 @@ body {
 	background-color: rgb( 251, 251, 251);
 }
 
-.chat-messages {
+.chat-messages, .chat-messages .room-message {
 	position: absolute;
 	top: 0; bottom: 0; right: 0; left: 34.66667%;
 	background-color: red;
 	background-color: rgb( 231, 224, 218);
 }
 
-.chat-messages .messages {
+.chat-messages .messages,
+.chat-messages .room-message {
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 70px;
 	padding: 40px;
@@ -129,3 +130,5 @@ body {
 .chat-messages .chat-input .chat-text::-moz-placeholder {
   font-family: sans-serif;
 }
+
+/* ROOM */

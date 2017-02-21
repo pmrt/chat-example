@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { MessageInput } from './input';
+
 export class MessageApp extends React.Component {
 
 	constructor( props ) {
@@ -25,6 +27,7 @@ export class MessageApp extends React.Component {
 	}
 
 	componentDidMount() {
+		this.mounted = true;
 		socket.emit('loaded');
 		socket.once( 'messages', function(msgs) {
 			this.setState({
@@ -32,8 +35,12 @@ export class MessageApp extends React.Component {
 			})
 		}.bind(this));
 		socket.on( 'message', function (msg) {
-			this.addMessage( msg )
+			if ( this.mounted) this.addMessage( msg );
 		}.bind(this));
+	}
+
+	componentWillUnmount() {
+		this.mounted = false;
 	}
 
 	render() {
@@ -46,46 +53,6 @@ export class MessageApp extends React.Component {
 	}
 
 }
-
-
-class MessageInput extends React.Component {
-	constructor(props){
-		super(props);
-		this.state = { text: ''}
-		this.handleKeyUp = this.handleKeyUp.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-	}
-
-	handleKeyUp( e ) {
-		if ( this.state.text && e.keyCode  === 13 ) {
-			this.props.handleEnter( this.state.text );
-			this.state.text = '';
-		}
-	}
-
-	handleChange(e) {
-	  this.setState({text: e.target.value});
-	}
-
-	render() {
-		return (
-				<div className="chat-input">
-					<div className="emoji">
-						<img width="24" height="24" src="./img/emoji.png" alt=""/>
-					</div>
-					<input
-					   onChange={this.handleChange}
-					   onKeyUp={this.handleKeyUp}
-					   value={this.state.text}
-					   className="chat-text" 
-					   id="input-text" 
-					   placeholder="Escribe un mensaje aquí" 
-					   type="text" />
-				</div>
-			);
-	}
-}
-
 
 class MessageList extends React.Component {
 	constructor(props) {
