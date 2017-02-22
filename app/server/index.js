@@ -5,21 +5,38 @@ const express = require('express'),
 	  io = require('socket.io')(http);
 
 var messages = [];
+var connected = [];
 var id = 0;
+
+function getClientById( id ) {
+	return connected[ getIndexById( id )];
+}
+
+function getIndexById( id ) {
+	return connected.indexOf( connected.find((i) => i.id == id) );
+}
+
+function removeUser( id ) {
+	connected.splice( getIndexById( id ), 1 );
+} 
 
 app.use(express.static(path.join(__dirname, '../public')));
 
 io.on('connection', function(socket) {
 	console.log('User connected');
 	
-	socket.on('loaded', function() {
+	socket.on('loaded', function( data ) {
 		// When component has loaded
 		// send last 40 messages
 		socket.emit( 'messages', messages );
+		connected.push( data );
+		io.emit( 'user:update', connected );
 	});
 
-	socket.on('disconnect', function(socket) {
+	socket.on('disconnect', function() {
 		console.log('User disconnected');
+		removeUser( socket.id );
+		io.emit( 'user:update', connected );
 	});
 
 	socket.on('message', function( data ) {
@@ -30,6 +47,18 @@ io.on('connection', function(socket) {
 		messages.push( data );
 		io.emit('message', data);
 	})
+
+	socket.on('message:private', function( data ) {
+		socket.broadcast.to( data.id ).emit( data.msg );
+		socket.broadcast.to( socket.id ).emit( data.msg );
+	})
+
+	// Client asks for receiver when 
+	// private chat is loaded
+	socket.on('who:receiver', function(id) {
+		socket.emit('receiver', getClientById(id) );
+	})
+
 });
 
 http.listen(process.env.PORT || 3000, function() {
