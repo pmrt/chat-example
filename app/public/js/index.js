@@ -1,8 +1,7 @@
 window.onload = setup;
 
 function setup() {
-	getRandomName();
-	getColors();
+	setDefaults();
 }
 
 const socket = io();

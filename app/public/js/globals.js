@@ -1,4 +1,5 @@
-var rootNode = document.getElementById('app-chat'),
+var rootNode = document.getElementById('app-root'),
+	chatListNode = document.getElementById('app-chatlist'),
 	profilePic = document.getElementById('profile'),
 	lastSender = '',
 	colors = [

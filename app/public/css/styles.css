@@ -6,6 +6,10 @@
 	box-sizing: border-box;
 }
 
+a {
+	text-decoration: none;
+}
+
 input { padding: 6px 13px !important; }
 
 html, body { height: 100%;margin: 0; }
@@ -31,27 +35,37 @@ body {
 	height: 60px;
 }
 
-.chat-header > .header-left {
+.content > .header-left {
 	height: inherit;
 	display: flex;
+	width: 34.666667%;
 }
 
-.chat-header > .header-left > .profile-pic {
+.content > .header-left > .profile-pic {
 	max-width: 45px;
 	padding: 10px 12px;
 }
 
-.chat-header > .header-left > .profile-pic > img {
+.content > .header-left > .profile-pic > img {
 	border-radius: 50%;
 	width: 40px;
 }
 
-.chat-header > .header-right {
+.content .header-right {
 	height: inherit;
 	border-left: 1px solid rgba(0, 0, 0, 0.08);
 	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.17);
 	z-index: 99;
 	position: relative;
+	height: 60px;
+	background: rgb( 238, 238, 238);
+}
+
+.content .header-right p {
+	padding: 20px 20px;
+	font-family: Helvetica;
+	letter-spacing: 0.2px;
+	font-size: 16px;
 }
 
 .chat-body {
@@ -59,13 +73,13 @@ body {
 	top: 60px; bottom: 0; left: 0; right: 0;
 }
 
-.chat-body .chat-list {
+.chat-list {
 	position: absolute;
-	top: 0; bottom: 0; right: 65.333333%; left: 0;
+	top: 60px; bottom: 0; right: 65.333333%; left: 0;
 	background-color: rgb( 251, 251, 251);
 }
 
-.chat-messages, .chat-messages .room-message {
+.chat-messages, .chat-messages .private-message {
 	position: absolute;
 	top: 0; bottom: 0; right: 0; left: 34.66667%;
 	background-color: red;
@@ -73,7 +87,7 @@ body {
 }
 
 .chat-messages .messages,
-.chat-messages .room-message {
+.chat-messages .private-message {
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 70px;
 	padding: 40px;
@@ -132,3 +146,42 @@ body {
 }
 
 /* ROOM */
+
+/* CHAT LIST */
+
+.chat-list .item-wrapper {
+	display: flex;
+}
+
+.chat-list .item-wrapper:hover {
+	background-color: rgb(244, 245, 245) !important;
+}
+
+.chat-list .item-wrapper img {
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+
+	/* Fix for an unexepected width error */
+	min-width: 40px;
+	/* Fix for padding images */
+	transform: translate(40%,35%);
+}
+
+.chat-list .item-wrapper .text-wrapper {
+	border-bottom: 1px solid rgba(204, 204, 204, 0.27);
+	margin-left: 16px;
+	width: 100%;
+}
+
+.chat-list .item-wrapper .text-wrapper p {
+	font-family: 'Helvetica';
+	font-size: 16px;
+	letter-spacing: 0.2px;
+	color: #333;
+	//padding: 4px 0px;
+	padding: 14px 12px;
+}
+
+
+
