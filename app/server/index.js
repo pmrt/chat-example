@@ -5,8 +5,10 @@ const express = require('express'),
 	  io = require('socket.io')(http);
 
 var messages = [];
+var private_messages = {};
 var connected = [];
 var id = 0;
+var priv_id = 0;
 
 function getClientById( id ) {
 	return connected[ getIndexById( id )];
@@ -18,19 +20,32 @@ function getIndexById( id ) {
 
 function removeUser( id ) {
 	connected.splice( getIndexById( id ), 1 );
-} 
+}
+
+function getRoomMessagesById( roomid ) {
+	return private_messages[roomid];
+}
+
+function isArrayEmpty( arr ) {
+	if ( arr === undefined ) return true;
+	if ( arr === null ) return true;
+	if (!arr.length > 0 ) return false;
+}
+
 
 app.use(express.static(path.join(__dirname, '../public')));
 
 io.on('connection', function(socket) {
 	console.log('User connected');
 	
-	socket.on('loaded', function( data ) {
+	socket.on('loaded', function( data, updateUser=true ) {
 		// When component has loaded
 		// send last 40 messages
 		socket.emit( 'messages', messages );
 		connected.push( data );
-		io.emit( 'user:update', connected );
+		if ( updateUser ) {
+			io.emit( 'user:update', connected );
+		}
 	});
 
 	socket.on('disconnect', function() {
@@ -49,14 +64,38 @@ io.on('connection', function(socket) {
 	})
 
 	socket.on('message:private', function( data ) {
-		socket.broadcast.to( data.id ).emit( data.msg );
-		socket.broadcast.to( socket.id ).emit( data.msg );
+		var msg = data.message,
+			roomID = data.room,
+			historial = getRoomMessagesById( roomID );
+		data.message.id = priv_id++;
+		if ( !isArrayEmpty(historial) ) {
+			if ( historial.length > 40 ) {
+				historial.shift();
+			}
+		}
+		private_messages[roomID].push( data.message );
+		io.sockets.in( roomID ).emit( 'message:private', msg );
+		// Emit push notification
+		socket.broadcast.to( roomID ).emit( 'push notification', msg );
+	})
+
+	socket.on('get:privs', function( roomID ) {
+		socket.emit( 'messages', getRoomMessagesById( roomID) );
 	})
 
 	// Client asks for receiver when 
 	// private chat is loaded
 	socket.on('who:receiver', function(id) {
 		socket.emit('receiver', getClientById(id) );
+	})
+
+	socket.on('join:room', function( roomID ) {
+		// Room id will be the handsake
+		console.log(socket.id + ' joining ' + roomID);
+		socket.join( roomID );
+		if ( isArrayEmpty(private_messages[roomID]) ) {
+			private_messages[roomID] = [];
+		}
 	})
 
 });

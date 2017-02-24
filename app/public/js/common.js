@@ -19,6 +19,7 @@ function setDefaults() {
 		  		id: socket.id,
 		  		image: socket.image
 		  	});
+		  	set( 'notFirstTime', true );
 	  }
 	});
 }
@@ -26,6 +27,12 @@ function setDefaults() {
 function set( prop, value ) {
 	socket[prop] = value;
 	return value;
+}
+
+function isArrayEmpty( arr ) {
+	if ( arr === undefined ) return true;
+	if ( arr === null ) return true;
+	if (!arr.length > 0 ) return false;
 }
 
 function getColors() {
@@ -40,6 +47,13 @@ function choice(arr) {
 
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getRandomKey() {
+	var res = "", str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	for( var i=0; i < 10; i++ )
+	    res += str.charAt(Math.floor(Math.random() * str.length));
+	return res;
 }
 
 function getTime() {

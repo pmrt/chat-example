@@ -64,7 +64,7 @@ class Message extends React.Component {
 			classArrow += " alt"
 		}
 		return (
-			<div ref={"wrapper-" +this.props.id} className={direction}>
+			<div key={this.props.id} ref={"wrapper-" +this.props.id} className={direction}>
 				<div className="bubble">
 				  <div className="txt">
 				    <p style={{color: this.props.color}} className="name" ref={"name-" +this.props.id}>{this.props.name}</p>

@@ -7,43 +7,69 @@ export class Private extends React.Component {
 
 	constructor( props ) {
 		super(props);
-		this.state = { messages: [], receiver: { name: ''} }
+		this.state = { messages: [], receiver: { name: ''}, room: '' }
 		this.handleEnter = this.handleEnter.bind( this );
 	}
 
 	handleEnter( text ) {
-		var self = this;
+		var self = this,
 			message = { 
 			nickname: socket.nickname, 
 			msg: text,
 			color: socket.color
 		}
 		socket.emit('message:private', {
-			"id": self.props.params.id,
-			"msg": message
+			"message": message,
+			"room": this.state.room
 		});
 	}
 
+	getHandShake() {
+		var clientID = socket.id,
+			receiverID = this.props.params.id, 
+			// Order doesn't really matter,
+			// what matters is that is sorted
+			// with the same algorithm within 
+			//server and client
+			handshake = [clientID, receiverID].sort().join('');
+			this.setState({ room: handshake });
+		return handshake;
+	}
+
 	addMessage( data ) {
-		this.setState( (prevState) => ({
-		  messages: prevState.messages.concat(data),
-		}));
+		if ( !isArrayEmpty( data) ) {
+			this.setState( (prevState) => ({
+			  messages: prevState.messages.concat(data),
+			}));
+		}
 	}
 
 	requestReceiver( id ) {
 		socket.emit( 'who:receiver', id);
 	}
 
+	requestPreviousMessages() {
+		socket.emit('get:privs', this.getHandShake() );
+	}
+
 	componentDidMount() {
 		var self = this;
 		this.mounted = true;
+		socket.emit( 'join:room', this.getHandShake() );
+		socket.on( 'messages', function(msgs) {
+			console.log( msgs );
+			if ( self.mounted  && !isArrayEmpty(msgs) ) self.setState({
+				messages: msgs
+			})
+		}.bind(this));
 		socket.on( 'message:private', function (msg) {
 			if ( self.mounted ) self.addMessage( msg );
 		}.bind(this));
 		socket.on( 'receiver', function( receiver ){
 			if ( self.mounted ) self.setState({ "receiver": receiver });
-		})
+		}.bind(this));
 		this.requestReceiver( this.props.params.id );
+		this.requestPreviousMessages();
 	}
 
 	componentWillUnmount() {
@@ -61,11 +87,13 @@ export class Private extends React.Component {
 
 	render() {
 		return (
-			<div key={this.props.params.id} className="chat-messages">
+			<div className="chat-messages">
 				<div className="header-right">
+					<div className="thumbail-wrapper">
+						<img src={this.state.receiver.image} />
+					</div>
 					<p>{this.state.receiver.name}</p>
 				</div>
-				<p>{this.props.params.id}</p>
 				<MessageList messages = {this.state.messages} />
 				<MessageInput handleEnter= {this.handleEnter} />
 			</div>

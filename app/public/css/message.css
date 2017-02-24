@@ -3,6 +3,10 @@
   margin-top: 25px;
 }
 
+.right-bubble-wrapper .bubble {
+  background-color: rgb( 221, 247, 200);
+}
+
 .left-bubble-wrapper {
   margin-top: 25px;
 }
@@ -27,6 +31,7 @@
 
 .bubble.alt {
   margin: 0 0 0 60px;
+  background-color: rgb( 221, 247, 200) !important;
 }
 .bubble .txt {
   padding: 5px 90px 5px 16px;
@@ -70,6 +75,7 @@
   right: -2px;
   bottom: 40px;
   left: auto;
+  background-color: rgb( 221, 247, 200);
 }
 .bubble .bubble-arrow:after {
   content: "";
@@ -83,4 +89,8 @@
 }
 .bubble .bubble-arrow.alt:after {
   transform: rotate(45deg) scaleY(-1);
+}
+
+.right-bubble-wrapper .bubble .bubble-arrow.alt:after {
+  border-top: 9px solid rgb( 221, 247, 200);
 }

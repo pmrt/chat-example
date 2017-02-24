@@ -13,7 +13,7 @@ export class ChatList extends React.Component {
 			self.setState( (prevState) => ({
 			  users: data
 			}));
-		})
+		}.bind(this));
 	}
 
 	componentWillUnmount() {
@@ -23,16 +23,18 @@ export class ChatList extends React.Component {
 	render() {
 		return (
 				<div className="chat-list">
-					<User users={this.state.users} />
+					<UserList users={this.state.users} />
 				</div>
 			);
 	}
 }
 
-class User extends React.Component {
+// TODO Split up users from userlist
+class UserList extends React.Component {
 	constructor( props ) {
 		super(props);
 		this.handleColor = this.handleColor.bind( this );
+		this.handleNotification = this.handleNotification.bind( this );
 	}
 
 	handleColor( e ) {
@@ -43,13 +45,37 @@ class User extends React.Component {
 		e.currentTarget.style.backgroundColor = "rgb(233, 235, 235)";
 	}
 
+	handleNotification( preview, receiver) {
+		// To do with react ( Needs to split up users from userlist )
+		var wrapper, elem, item, chats = this.refs;
+		for ( item in chats ) {
+			if ( chats[item].textContent == receiver ) {
+			    wrapper = document.createElement( 'div' );
+			    wrapper.className = 'notification';
+				elem = document.createElement( 'p' );
+				elem.innerHTML = preview;
+				wrapper.appendChild( elem );
+				chats[item].appendChild( wrapper );
+			}
+		}
+	}
+
+
+	componentDidMount() {
+		socket.on( 'push notification', function( lastMsg ) {
+			var preview = lastMsg.msg,
+				receiver = lastMsg.nickname;
+			this.handleNotification( preview, receiver );			
+		}.bind(this));
+	}
+
 	render() {
 		var users = this.props.users.map( (usr, index) => {
 			if ( usr.name == socket.nickname ) return ;
 			return ( 
 					<Link key={usr.id} to={`/private/${usr.id}`}>
 						<div>
-							<div className="item-wrapper" onClick={this.handleColor} ref={`chat-${usr.id}`}>
+							<div data-name={usr.name} className="item-wrapper" onClick={this.handleColor} ref={`chat-${usr.id}`}>
 									<img src={usr.image} />
 									<div className="text-wrapper">
 										<p>{usr.name}</p>
@@ -75,4 +101,8 @@ class User extends React.Component {
 				</div>
 			);
 	}	
+}
+
+class User extends React.Component {
+	
 }

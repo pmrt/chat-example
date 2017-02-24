@@ -8,6 +8,7 @@ export class MessageApp extends React.Component {
 	constructor( props ) {
 		super(props);
 		this.state = { messages: [] }
+		this.firstMount = true;
 		this.handleEnter = this.handleEnter.bind( this );
 	}
 
@@ -28,14 +29,24 @@ export class MessageApp extends React.Component {
 
 	componentDidMount() {
 		this.mounted = true;
-		socket.once( 'messages', function(msgs) {
-		this.setState({
-			messages: msgs
-		})
+
+		socket.on( 'messages', function(msgs) {
+			if ( this.mounted ) this.setState({
+				messages: msgs
+			})
 		}.bind(this));
 		socket.on( 'message', function (msg) {
 			if ( this.mounted) this.addMessage( msg );
 		}.bind(this));
+
+		if ( socket.notFirstTime ) {
+			socket.emit('loaded', {
+				name: socket.nickname,
+				id: socket.id,
+				image: socket.image
+			}, false);
+		}
+
 	}
 
 	componentWillUnmount() {
@@ -46,6 +57,9 @@ export class MessageApp extends React.Component {
 		return (
 				<div className="chat-messages">
 					<div className="header-right">
+						<div className="thumbail-wrapper">
+							<img src="https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png" />
+						</div>
 						<p> General </p>
 					</div>
 					<MessageList messages = {this.state.messages} />
