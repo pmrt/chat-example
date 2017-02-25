@@ -7,7 +7,7 @@ export class MessageApp extends React.Component {
 
 	constructor( props ) {
 		super(props);
-		this.state = { messages: [] }
+		this.state = { messages: [], typingMsg: '', typingName: '' }
 		this.firstMount = true;
 		this.handleEnter = this.handleEnter.bind( this );
 	}
@@ -46,6 +46,20 @@ export class MessageApp extends React.Component {
 				image: socket.image
 			}, false);
 		}
+		socket.on('user typing', function( name ) {
+			this.setState({
+				typingMsg: name + " está escribiendo...",
+				typingName: name
+			});
+		}.bind(this));
+
+		socket.on('not typing', function( name ) {
+			if ( name == this.state.typingName )
+			this.setState({
+				typingMsg: '',
+				typingName: ''
+			});
+		}.bind(this));
 
 	}
 
@@ -60,7 +74,12 @@ export class MessageApp extends React.Component {
 						<div className="thumbail-wrapper">
 							<img src="https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png" />
 						</div>
-						<p> General </p>
+						<div className="header-text">
+							<p> General </p>
+							<div className="typing-wrapper">
+								<p>{ this.state.typingMsg }</p>
+							</div>
+						</div>
 					</div>
 					<MessageList messages = {this.state.messages} />
 					<MessageInput handleEnter= {this.handleEnter} />

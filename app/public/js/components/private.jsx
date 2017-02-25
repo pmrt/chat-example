@@ -55,9 +55,7 @@ export class Private extends React.Component {
 	componentDidMount() {
 		var self = this;
 		this.mounted = true;
-		socket.emit( 'join:room', this.getHandShake() );
 		socket.on( 'messages', function(msgs) {
-			console.log( msgs );
 			if ( self.mounted  && !isArrayEmpty(msgs) ) self.setState({
 				messages: msgs
 			})
@@ -68,8 +66,6 @@ export class Private extends React.Component {
 		socket.on( 'receiver', function( receiver ){
 			if ( self.mounted ) self.setState({ "receiver": receiver });
 		}.bind(this));
-		this.requestReceiver( this.props.params.id );
-		this.requestPreviousMessages();
 	}
 
 	componentWillUnmount() {
@@ -80,9 +76,15 @@ export class Private extends React.Component {
 	// so it updates succesfully receiver when switching
 	// conversation
 	componentWillReceiveProps(nextProps){
+		this.setState({
+			messages: []
+		})
 	    if (nextProps.params.id !== this.props.params.id) {
 	    	this.requestReceiver( nextProps.params.id );
 	    }
+	    socket.emit( 'join:room', this.getHandShake() );
+	    this.requestReceiver( this.props.params.id );
+	    this.requestPreviousMessages();
 	}
 
 	render() {

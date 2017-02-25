@@ -98,6 +98,14 @@ io.on('connection', function(socket) {
 		}
 	})
 
+	socket.on('typing:true', function( user ) {
+		socket.broadcast.emit( 'user typing', user.name);
+	})
+
+	socket.on('typing:false', function( user ) {
+		socket.broadcast.emit( 'not typing', user.name);
+	})
+
 });
 
 http.listen(process.env.PORT || 3000, function() {
