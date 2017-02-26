@@ -16,16 +16,22 @@ export class MessageList extends React.Component {
 			} else {
 				direction = 'left-bubble-wrapper'
 			}
-			return (
-					<Message
-							key={msg.id}
-							id={msg.id}
-							direction={direction}
-							msg={msg.msg}
-							name={msg.nickname}
-							color={msg.color}
-					/>
-				);
+			if ( msg.nickname !== "server-msg" ) {
+				return (
+						<Message
+								key={msg.id}
+								id={msg.id}
+								direction={direction}
+								msg={msg.msg}
+								name={msg.nickname}
+								color={msg.color}
+						/>
+					);
+			} else {
+				return (
+						<ServerMessage msg={msg.msg}/>
+					);
+			}
 		});
 	}
 
@@ -78,5 +84,20 @@ class Message extends React.Component {
 	}	
 }
 
+class ServerMessage extends React.Component {
+	constructor( props ) {
+		super( props );
+	}
+
+	render() {
+		return (
+				<div className="server-msg-wrapper">
+					<div className="server-msg">
+						<p>{this.props.msg}</p>
+					</div>
+				</div>
+			);
+	}
+}
 
 

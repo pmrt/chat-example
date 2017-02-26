@@ -99,7 +99,7 @@
 .chat-messages .private-message {
   position: absolute;
   top: 60px; left: 0; right: 0; bottom: 70px;
-  padding: 40px;
+  padding: 25px;
   overflow: auto;
 }
 
@@ -191,4 +191,24 @@
 .chat-messages .header-right .thumbail-wrapper img {
   width: 40px;
   border-radius: 50px;
+}
+
+/* SERVER MESSAGES */
+
+.server-msg > p {
+    margin: 0;
+    padding: 0;
+}
+.server-msg {
+    text-align: center;
+    background: rgb(213,229,239);
+    display: inline-block;
+    position: relative;
+    border-radius: 50px;
+    padding: 4px 16px;
+    margin: 6px 0px;
+}
+
+.server-msg-wrapper {
+  text-align: center;
 }

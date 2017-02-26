@@ -129,3 +129,77 @@ body {
     border: 1px solid transparent;
     border-radius: 50px;
 }
+
+/* MODAL */
+
+.super-bg {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  background: rgb(177, 177, 177);
+}
+
+.user-header {
+	position: relative;
+    background: rgb(22, 150, 135);
+    height: 200px;
+}
+
+.user-modal {
+    position: absolute;
+    background: rgb(238, 238, 238);
+    top: 16%;
+    left: 34%;
+    right: 34%;
+    bottom: 8%;
+    border-radius: 4px;
+    box-shadow: 1px 1px 13px rgba(0, 0, 0, 0.22);
+}
+
+.user-p-wrapper {
+    position: relative;
+    text-align: center;
+    top: 80%;
+}
+
+.user-p-wrapper p {
+  color: #ebebeb;
+}
+
+.user-img-wrapper {
+    position: absolute;
+    top: 10%;
+    left: 35%;
+}
+
+.user-img-wrapper > img  {
+  border-radius: 100px;
+  width: 128px;
+  height: 128px;
+}
+
+.user-text > input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.31);
+    outline: none;
+    text-align: center;
+}
+
+.user-text {
+    position: relative;
+    margin: 0 auto;
+    max-width: 300px;
+    top: 20px;
+}
+
+.user-button-wrapper a {
+  width: 100%
+}
+
+.user-button-wrapper {
+    position: relative;
+    max-width: 150px;
+    margin: 0 auto;
+    top: 60px;
+}

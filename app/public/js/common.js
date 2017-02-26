@@ -1,28 +1,23 @@
-function setDefaults() {
-	var nick;
-	$.ajax({
-	  url: 'https://randomuser.me/api/',
-	  dataType: 'json',
-	  success: ( data ) => {
-		  	let name = data.results[0].name,
-		  		images = data.results[0].picture;
-		  	nick = name.first + " " + name.last;
-		  	set( 'nickname', capitalize(nick) );
-		  	profilePic.src = images.large || images.medium;
-		  	set( 'image', profilePic.src);
-		  	getColors();
+// function setDefaults() {
+// 	var nick;
+// 	$.ajax({
+// 	  url: 'https://randomuser.me/api/',
+// 	  dataType: 'json',
+// 	  success: ( data ) => {
+// 		  	let name = data.results[0].name,
+// 		  		images = data.results[0].picture;
+// 		  	nick = name.first + " " + name.last;
+// 		  	set( 'nickname', capitalize(nick) );
+// 		  	profilePic.src = images.large || images.medium;
+// 		  	set( 'image', profilePic.src);
+// 		  	getColors();
 
-		  	// When socket has loaded and got
-		  	// random name and colors
-		  	socket.emit('loaded', {
-		  		name: socket.nickname,
-		  		id: socket.id,
-		  		image: socket.image
-		  	});
-		  	set( 'notFirstTime', true );
-	  }
-	});
-}
+// 		  	name = socket.nickname;
+// 		  	profilePicSrc = socket.image;
+// 		  	set( 'notFirstTime', true );
+// 	  }
+// 	});
+// }
 
 function set( prop, value ) {
 	socket[prop] = value;

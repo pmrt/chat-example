@@ -94,7 +94,9 @@ export class Private extends React.Component {
 					<div className="thumbail-wrapper">
 						<img src={this.state.receiver.image} />
 					</div>
-					<p>{this.state.receiver.name}</p>
+					<div className="header-text">
+						<p>{this.state.receiver.name}</p>
+					</div>
 				</div>
 				<MessageList messages = {this.state.messages} />
 				<MessageInput handleEnter= {this.handleEnter} />

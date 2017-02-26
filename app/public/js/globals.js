@@ -2,6 +2,8 @@ var rootNode = document.getElementById('app-root'),
 	chatListNode = document.getElementById('app-chatlist'),
 	profilePic = document.getElementById('profile'),
 	lastSender = '',
+	name = '',
+	profilePicSrc = '',
 	colors = [
 	  		{r: 46, g: 204, b: 113 },
 	  		{r: 52, g: 152, b: 219 },

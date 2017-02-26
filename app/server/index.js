@@ -26,6 +26,11 @@ function getRoomMessagesById( roomid ) {
 	return private_messages[roomid];
 }
 
+function getNameById( socketid ) {
+	var obj = connected.find( (i) => i.id == socketid )
+	if ( obj.hasOwnProperty('name') ) return obj.name; 
+}
+
 function isArrayEmpty( arr ) {
 	if ( arr === undefined ) return true;
 	if ( arr === null ) return true;
@@ -43,13 +48,16 @@ io.on('connection', function(socket) {
 		// send last 40 messages
 		socket.emit( 'messages', messages );
 		connected.push( data );
+		console.log(connected);
 		if ( updateUser ) {
 			io.emit( 'user:update', connected );
+			io.emit( 'user:connected', connected );
 		}
 	});
 
 	socket.on('disconnect', function() {
 		console.log('User disconnected');
+		io.emit( 'user:disconnect', getNameById( socket.id ) );
 		removeUser( socket.id );
 		io.emit( 'user:update', connected );
 	});
