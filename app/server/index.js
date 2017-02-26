@@ -28,7 +28,7 @@ function getRoomMessagesById( roomid ) {
 
 function getNameById( socketid ) {
 	var obj = connected.find( (i) => i.id == socketid )
-	if ( obj.hasOwnProperty('name') ) return obj.name; 
+	if ( obj ) return obj.name; 
 }
 
 function isArrayEmpty( arr ) {
