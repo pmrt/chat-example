@@ -38,7 +38,7 @@ function isArrayEmpty( arr ) {
 }
 
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public/dist')));
 
 io.on('connection', function(socket) {
 	console.log('User connected');
