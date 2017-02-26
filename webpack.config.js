@@ -7,6 +7,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  devtool: 'cheap-source-map',
   module: {
     loaders: [
       {
