@@ -11,7 +11,7 @@ export class MessageApp extends React.Component {
 		super(props);
 		this.state = { 
 			messages: [], 
-			typingMsg: 'this is a test message typing...', 
+			typingMsg: '', 
 			typingName: '', 
 			name: '', 
 			profile: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'
