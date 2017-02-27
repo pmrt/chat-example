@@ -5,11 +5,13 @@ Warning: It is a two day project, so it may be inestable!
 # Features
 
 1. General chat
-2. Shows when someone's typing within general chat
-3. Private chats
-4. Notifications in private chats (inestable)
-5. Uses the RandomAPI to provide random usernames/profiles pics
-6. Server messages when someone connect/disconnect
+2. Historial: New connected users can see the latest 40 messages
+3. Shows when someone's typing within general chat
+4. Private chats
+5. Notifications in private chats (inestable)
+6. Uses the RandomAPI to provide random usernames/profiles pics
+7. Server messages when someone connect/disconnect
+8. WhatsApp alike
 
 # Technologies
 - jQuery
